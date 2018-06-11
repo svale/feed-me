@@ -111,6 +111,11 @@ abstract class Field extends Component
                 ]
             ]);
 
+            // 3x5 ad hoc HACK: Set postDate to imported date
+            if (isset($fieldContent['postDateImport'])) {
+                $element->postDate = $fieldContent['postDateImport'];
+            }
+
             if (!$elementsService->saveElement($element)) {
                 FeedMe::error($this->feed, 'Unable to save sub-field: ' . json_encode($element->getErrors()));
             }

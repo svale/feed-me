@@ -56,6 +56,15 @@ class DataHelper
                 } else {
                     $value[] = $nodeValue;
                 }
+
+                // 3x5: DIRTY HACK TO INHERIT parent entry_date!.
+                if($nodePath == 'entry_date') {
+                    unset($value); // reset value as it is saved as string
+                    for ($x = 0; $x <= 30; $x++) { // 30 is a magic number that must be equal to or higher than number of entries
+                        $dateValue = DateHelper::parseString($nodeValue);  // save date as dateTime object
+                        $value[] = $dateValue;
+                    }
+                }
             }
         }
 
